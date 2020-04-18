@@ -1,6 +1,8 @@
 package io.vipsamleti.springbootslackintegration.controllers;
 
 import io.vipsamleti.springbootslackintegration.analyzers.EventsAnalyzer;
+import io.vipsamleti.springbootslackintegration.models.Attachment;
+import io.vipsamleti.springbootslackintegration.models.SlackResponse;
 import io.vipsamleti.springbootslackintegration.models.User;
 import io.vipsamleti.springbootslackintegration.reporters.EventsReporter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class EventController {
     }
 
     @RequestMapping(value = "/send-mail",  method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String onReceiveSlashCommand(@RequestParam("team_id") String teamId,
+    public ResponseEntity onReceiveSlashCommand(@RequestParam("team_id") String teamId,
                                         @RequestParam("team_domain") String teamDomain,
                                         @RequestParam("channel_id") String channelId,
                                         @RequestParam("channel_name") String channelName,
@@ -39,7 +41,20 @@ public class EventController {
                                         @RequestParam("command") String command,
                                         @RequestParam("text") String text,
                                         @RequestParam("response_url") String responseUrl) {
-        return text + " This is my JSON response";
+
+
+        //business logic code for sending email to text variable
+        SlackResponse response = new SlackResponse();
+        response.setText("This is the response text");
+        response.setResponseType("in_channel");
+
+        Attachment attachment = new Attachment();
+        attachment.setText("This is the attachment text");
+        attachment.setColor("#0000ff");
+
+        response.getAttachments().add(attachment);
+
+        return ResponseEntity.ok().body(response);
     }
 
 
