@@ -17,7 +17,7 @@ public class SlackConfiguration {
     public SlackClient getSlackClient(){
 
         SlackClientRuntimeConfig runtimeConfig = SlackClientRuntimeConfig.builder()
-                                                .setTokenSupplier(() -> SLACK_API_TOKEN)
+                                                .setTokenSupplier(() -> "xoxb-1064399718182-1083774805649-vrhIYCKEyWiCGgG0pHDnjQEv")
                                                 .build();
 
         return SlackClientFactory.defaultFactory().build(runtimeConfig);
