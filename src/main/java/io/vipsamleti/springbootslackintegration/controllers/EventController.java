@@ -45,7 +45,7 @@ public class EventController {
 
         //business logic code for sending email to text variable
         SlackResponse response = new SlackResponse();
-        response.setText("This is the response text");
+        response.setText("Mail has been sent successfully to "+ text);
         response.setResponseType("in_channel");
 
         Attachment attachment = new Attachment();
